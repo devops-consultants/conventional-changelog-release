@@ -1,3 +1,10 @@
+## [0.1.4](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.3...v0.1.4) (2024-07-24)
+
+
+### Bug Fixes
+
+* removed verbose flag on conventional-changelog unless debugging ([999779d](https://github.com/devops-consultants/conventional-changelog-release/commit/999779dc8e848933e27a77f19c217a8103d8d859))
+
 ## [0.1.3](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.2...v0.1.3) (2024-07-24)
 
 
