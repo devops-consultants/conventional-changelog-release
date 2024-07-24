@@ -15,10 +15,7 @@ TAG_PREFIX=${TAG_PREFIX:="v"}
 COMMITTER_NAME=${GIT_COMMITTER_NAME:="Conventional Commits Release"}
 COMMITTER_EMAIL=${GIT_COMMITTER_EMAIL:="noreply@example.com"}
 
-# RUN_TFLINT=${RUN_TFLINT:="true"}
-# RUN_TRIVY=${RUN_TRIVY:="true"}
-# RUN_VALIDATE=${RUN_VALIDATE:="true"}
-# RUN_FMT=${RUN_FMT:="true"}
+RUN_GIT_PUSH=${RUN_GIT_PUSH:="false"}
 
 enable_debug() {
   if [[ "${DEBUG}" == "true" ]]; then
@@ -97,54 +94,15 @@ GIT_COMMITTER_EMAIL=${COMMITTER_EMAIL}
 EMAIL=${COMMITTER_EMAIL}
 export GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL EMAIL
 
+info "Committing changes"
 git add ${TF_MODULE_PATH}/CHANGELOG.md
 git commit -m "chore(release): update changelog for ${TF_MODULE_PATH} [skip ci]"
 git tag -f -am "Tagging for release ${TAG_PREFIX}${NEW_VERSION}" "${TAG_PREFIX}${NEW_VERSION}" 
-git push origin "${TAG_PREFIX}${NEW_VERSION}"
 
-# cd ${TF_MODULE_PATH}
+if [[ "${RUN_GIT_PUSH}" == "true" ]]; then
+  info "Pushing changes to remote"
+  git push origin HEAD
+  git push origin "${TAG_PREFIX}${NEW_VERSION}"
+fi
 
-# if [[ "${RUN_FMT}" == "true" ]]; then
-#   info "Checking module formatting"
-#   run terraform init && terraform fmt -check
-
-#   if [[ "${status}" == "0" ]]; then
-#     success "Success!"
-#   else
-#     fail "Error!"
-#   fi
-# fi
-
-# if [[ "${RUN_VALIDATE}" == "true" ]]; then
-#   info "Checking module validation"
-#   run terraform validate
-
-#   if [[ "${status}" == "0" ]]; then
-#     success "Success!"
-#   else
-#     fail "Error!"
-#   fi
-# fi
-
-
-# if [[ "${RUN_TFLINT}" == "true" ]]; then
-#   info "Checking module linting"
-#   run tflint
-
-#   if [[ "${status}" == "0" ]]; then
-#     success "Success!"
-#   else
-#     fail "Error!"
-#   fi
-# fi
-
-# if [[ "${RUN_TRIVY}" == "true" ]]; then
-#   info "Checking module vulnerabilities"
-#   run trivy config .
-
-#   if [[ "${status}" == "0" ]]; then
-#     success "Success!"
-#   else
-#     fail "Error!"
-#   fi
-# fi
+success "Release complete"
