@@ -1,0 +1,11 @@
+name: Conventional Commit Release
+image: devopsconsultants/conventional-changelog-release:0.1.0
+description: This pipe runs changelog generation and release creation based on conventional commits.
+category: Code quality
+repository: https://github.com/devops-consultants/conventional-changelog-release
+maintainer:
+  name: DevOps Consultants
+tags:
+  - bitbucket-pipelines
+  - pipes
+  - bash
