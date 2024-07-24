@@ -12,7 +12,7 @@ RUN npm install -g conventional-changelog-cli conventional-recommended-bump conv
 # Set the default directory for the safe command
 RUN git config --global --add safe.directory /opt/atlassian/pipelines/agent/build
 
-COPY pipe.sh /
+COPY pipe.sh config.cjs /
 RUN chmod a+x /*.sh
 
 ENTRYPOINT ["/pipe.sh"]

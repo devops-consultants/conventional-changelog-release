@@ -14,6 +14,7 @@ TAG_PREFIX=${TAG_PREFIX:="v"}
 
 COMMITTER_NAME=${GIT_COMMITTER_NAME:="Conventional Commits Release"}
 COMMITTER_EMAIL=${GIT_COMMITTER_EMAIL:="noreply@example.com"}
+CONFIG=${CONFIG:="/config.cjs"}
 
 RUN_GIT_PUSH=${RUN_GIT_PUSH:="false"}
 
@@ -80,7 +81,7 @@ info "New version: ${NEW_VERSION}"
 git tag "${TAG_PREFIX}${NEW_VERSION}" 
 
 info "Generating CHANGELOG.md"
-run conventional-changelog -p conventionalcommits -i ${TF_MODULE_PATH}/CHANGELOG.md -s -r 0 -t ${TAG_PREFIX} --commit-path ${TF_MODULE_PATH} -u false
+run conventional-changelog -v -n ${CONFIG} -p conventionalcommits -i ${TF_MODULE_PATH}/CHANGELOG.md -s -r 0 -t ${TAG_PREFIX} --commit-path ${TF_MODULE_PATH} -u false
 if [[ "${status}" == "0" ]]; then
   success "Success!"
 else
