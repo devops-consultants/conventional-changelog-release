@@ -1,3 +1,10 @@
+## [0.1.7](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.6...v0.1.7) (2024-07-24)
+
+
+### Bug Fixes
+
+* correcting parameters on conventional-recommended-bump ([6feb0a6](https://github.com/devops-consultants/conventional-changelog-release/commit/6feb0a68099ca8030d4852d6b08d11158fb84f43))
+
 ## [0.1.6](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.5...v0.1.6) (2024-07-24)
 
 
