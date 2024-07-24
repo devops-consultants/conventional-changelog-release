@@ -1,3 +1,10 @@
+## [0.1.5](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.4...v0.1.5) (2024-07-24)
+
+
+### Bug Fixes
+
+* checking changelog is updated before trying to commit it ([9196d13](https://github.com/devops-consultants/conventional-changelog-release/commit/9196d137f94bde6ab87f969567db8a866617a889))
+
 ## [0.1.4](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.3...v0.1.4) (2024-07-24)
 
 
