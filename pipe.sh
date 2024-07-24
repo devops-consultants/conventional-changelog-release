@@ -86,11 +86,22 @@ if [[ ${DEBUG} == "true" ]]; then
 else
   CHANGELOG_VERBOSE_FLAG=""
 fi
-run conventional-changelog ${CHANGELOG_VERBOSE_FLAG} -n ${CONFIG} -p conventionalcommits -i ${TF_MODULE_PATH}/CHANGELOG.md -s -r 0 -t ${TAG_PREFIX} --commit-path ${TF_MODULE_PATH} -u false
+run conventional-changelog ${CHANGELOG_VERBOSE_FLAG} -n ${CONFIG} -p conventionalcommits -i ${TF_MODULE_PATH}/CHANGELOG.md -o ${TF_MODULE_PATH}/CHANGELOG.md.new -r 0 -t ${TAG_PREFIX} --commit-path ${TF_MODULE_PATH} -u false 
 if [[ "${status}" == "0" ]]; then
+
   success "Success!"
 else
   fail "Error!"
+fi
+
+run diff -q ${TF_MODULE_PATH}/CHANGELOG.md ${TF_MODULE_PATH}/CHANGELOG.md.new
+if [[ "${status}" == "0" ]]; then
+  fail "No changes detected in CHANGELOG.md"
+  rm ${TF_MODULE_PATH}/CHANGELOG.md.new
+  exit 1
+else
+  info "Changes detected in CHANGELOG.md"
+  mv ${TF_MODULE_PATH}/CHANGELOG.md.new ${TF_MODULE_PATH}/CHANGELOG.md
 fi
 
 GIT_AUTHOR_NAME=${COMMITTER_NAME}
