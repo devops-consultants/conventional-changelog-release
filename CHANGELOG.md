@@ -1,3 +1,10 @@
+## [0.1.6](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.5...v0.1.6) (2024-07-24)
+
+
+### Bug Fixes
+
+* force the new version tag to apply before generating changelog ([6aa1182](https://github.com/devops-consultants/conventional-changelog-release/commit/6aa1182727f48ea75c076f2f68c9095aa4e09f79))
+
 ## [0.1.5](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.4...v0.1.5) (2024-07-24)
 
 
