@@ -1,3 +1,10 @@
+## [0.1.3](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.2...v0.1.3) (2024-07-24)
+
+
+### Bug Fixes
+
+* Added config.cjs with an override pattern for the bitbucket PR Merge message regex ([32f9265](https://github.com/devops-consultants/conventional-changelog-release/commit/32f9265f743dd31070b56218336c0304a7fc45f1))
+
 ## [0.1.2](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.1...v0.1.2) (2024-07-24)
 
 
