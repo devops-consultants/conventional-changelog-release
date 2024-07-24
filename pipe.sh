@@ -77,8 +77,15 @@ conventional-recommended-bump -p conventionalcommits --commit-path ${TF_MODULE_P
 NEW_VERSION=$(increment_version ${LAST_VERSION} ${INCREMENT_TYPE})
 info "New version: ${NEW_VERSION}"
 
-# git tag -a "${TAG_PREFIX}${NEW_VERSION}" -m "Release ${TAG_PREFIX}${NEW_VERSION}"
-git tag "${TAG_PREFIX}${NEW_VERSION}" 
+info "Tagging release: ${TAG_PREFIX}${NEW_VERSION}" 
+run git tag -f "${TAG_PREFIX}${NEW_VERSION}" 
+if [[ "${status}" == "0" ]]; then
+  success "Success!"
+else
+  fail "Error!"
+  exit 1
+fi
+
 
 info "Generating CHANGELOG.md"
 if [[ ${DEBUG} == "true" ]]; then
