@@ -9,6 +9,9 @@ COPY LICENSE pipe.yml README.md /
 
 RUN npm install -g conventional-changelog-cli conventional-recommended-bump conventional-changelog-conventionalcommits git-semver-tags
 
+# Set the default directory for the safe command
+RUN git config --global --add safe.directory /opt/atlassian/pipelines/agent/build
+
 COPY pipe.sh /
 RUN chmod a+x /*.sh
 
