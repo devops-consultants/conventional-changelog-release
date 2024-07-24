@@ -81,7 +81,12 @@ info "New version: ${NEW_VERSION}"
 git tag "${TAG_PREFIX}${NEW_VERSION}" 
 
 info "Generating CHANGELOG.md"
-run conventional-changelog -v -n ${CONFIG} -p conventionalcommits -i ${TF_MODULE_PATH}/CHANGELOG.md -s -r 0 -t ${TAG_PREFIX} --commit-path ${TF_MODULE_PATH} -u false
+if [[ ${DEBUG} == "true" ]]; then
+  CHANGELOG_VERBOSE_FLAG=" -v"
+else
+  CHANGELOG_VERBOSE_FLAG=""
+fi
+run conventional-changelog ${CHANGELOG_VERBOSE_FLAG} -n ${CONFIG} -p conventionalcommits -i ${TF_MODULE_PATH}/CHANGELOG.md -s -r 0 -t ${TAG_PREFIX} --commit-path ${TF_MODULE_PATH} -u false
 if [[ "${status}" == "0" ]]; then
   success "Success!"
 else
