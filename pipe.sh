@@ -61,6 +61,9 @@ else
   LAST_VERSION=$(echo "${LAST_TAG}" | sed "s/${TAG_PREFIX}//")
 fi
 
+if [[ "${DEBUG}" == "true" ]]; then
+  git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit ${GIT_FILTER} -- ${TF_MODULE_PATH}
+fi
 
 NUM_COMMITS=$(git log --oneline ${GIT_FILTER} -- ${TF_MODULE_PATH} | wc -l)
 info "Number of commits since last release: ${NUM_COMMITS}"
@@ -70,9 +73,9 @@ if [[ "${NUM_COMMITS}" == "0" ]]; then
   exit 0
 fi
 
-INCREMENT_TYPE=$(conventional-recommended-bump -p conventionalcommits --commit-path ${TF_MODULE_PATH})
+INCREMENT_TYPE=$(conventional-recommended-bump -p conventionalcommits --commit-path ${TF_MODULE_PATH} -g ${CONFIG} -t ${TAG_PREFIX})
 echo -n "Version Increment: "
-conventional-recommended-bump -p conventionalcommits --commit-path ${TF_MODULE_PATH} -v
+conventional-recommended-bump -p conventionalcommits --commit-path ${TF_MODULE_PATH} -g ${CONFIG} -t ${TAG_PREFIX} -v
 
 NEW_VERSION=$(increment_version ${LAST_VERSION} ${INCREMENT_TYPE})
 info "New version: ${NEW_VERSION}"
