@@ -1,3 +1,10 @@
+## [0.1.8](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.7...v0.1.8) (2024-12-24)
+
+
+### Bug Fixes
+
+* tweaks to pipe.sh script ([29f870d](https://github.com/devops-consultants/conventional-changelog-release/commit/29f870d9b890026aa6243790ce1eab7d94520910))
+
 ## [0.1.7](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.6...v0.1.7) (2024-07-24)
 
 
