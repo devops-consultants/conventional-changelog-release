@@ -15,8 +15,16 @@ TAG_PREFIX=${TAG_PREFIX:="v"}
 COMMITTER_NAME=${GIT_COMMITTER_NAME:="Conventional Commits Release"}
 COMMITTER_EMAIL=${GIT_COMMITTER_EMAIL:="noreply@example.com"}
 CONFIG=${CONFIG:="/config.cjs"}
+VERSION_FILE=${VERSION_FILE:="version.json"}
 
 RUN_GIT_PUSH=${RUN_GIT_PUSH:="false"}
+
+GIT_AUTHOR_NAME=${COMMITTER_NAME}
+GIT_AUTHOR_EMAIL=${COMMITTER_EMAIL}
+GIT_COMMITTER_NAME=${COMMITTER_NAME}
+GIT_COMMITTER_EMAIL=${COMMITTER_EMAIL}
+EMAIL=${COMMITTER_EMAIL}
+export GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL EMAIL
 
 enable_debug() {
   if [[ "${DEBUG}" == "true" ]]; then
@@ -81,7 +89,8 @@ NEW_VERSION=$(increment_version ${LAST_VERSION} ${INCREMENT_TYPE})
 info "New version: ${NEW_VERSION}"
 
 info "Tagging release: ${TAG_PREFIX}${NEW_VERSION}" 
-run git tag -f "${TAG_PREFIX}${NEW_VERSION}" 
+
+run git tag -f -am "Tagging for release ${TAG_PREFIX}${NEW_VERSION}" "${TAG_PREFIX}${NEW_VERSION}" 
 if [[ "${status}" == "0" ]]; then
   success "Success!"
 else
@@ -96,7 +105,8 @@ if [[ ${DEBUG} == "true" ]]; then
 else
   CHANGELOG_VERBOSE_FLAG=""
 fi
-run conventional-changelog ${CHANGELOG_VERBOSE_FLAG} -n ${CONFIG} -p conventionalcommits -i ${TF_MODULE_PATH}/CHANGELOG.md -o ${TF_MODULE_PATH}/CHANGELOG.md.new -r 0 -t ${TAG_PREFIX} --commit-path ${TF_MODULE_PATH} -u false 
+# run conventional-changelog ${CHANGELOG_VERBOSE_FLAG} -n ${CONFIG} -p conventionalcommits -i ${TF_MODULE_PATH}/CHANGELOG.md -o ${TF_MODULE_PATH}/CHANGELOG.md.new -r 0 -t ${TAG_PREFIX} --commit-path ${TF_MODULE_PATH} -u false 
+run conventional-changelog ${CHANGELOG_VERBOSE_FLAG} -n ${CONFIG} -p conventionalcommits -i ${TF_MODULE_PATH}/CHANGELOG.md -o ${TF_MODULE_PATH}/CHANGELOG.md.new -r 0 -t ${TAG_PREFIX} --commit-path ${TF_MODULE_PATH} 
 if [[ "${status}" == "0" ]]; then
 
   success "Success!"
@@ -113,13 +123,6 @@ else
   info "Changes detected in CHANGELOG.md"
   mv ${TF_MODULE_PATH}/CHANGELOG.md.new ${TF_MODULE_PATH}/CHANGELOG.md
 fi
-
-GIT_AUTHOR_NAME=${COMMITTER_NAME}
-GIT_AUTHOR_EMAIL=${COMMITTER_EMAIL}
-GIT_COMMITTER_NAME=${COMMITTER_NAME}
-GIT_COMMITTER_EMAIL=${COMMITTER_EMAIL}
-EMAIL=${COMMITTER_EMAIL}
-export GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL EMAIL
 
 info "Committing changes"
 git add ${TF_MODULE_PATH}/CHANGELOG.md
