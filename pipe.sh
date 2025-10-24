@@ -9,7 +9,7 @@ source "$(dirname "$0")/common.sh"
 TF_MODULE_PATH=${TF_MODULE_PATH:?"TF_MODULE_PATH env variable is required"}
 
 # Default values
-DEBUG=${DEBUG:="false"}
+DEBUG=${DEBUG:="true"}
 TAG_PREFIX=${TAG_PREFIX:="v"}
 
 COMMITTER_NAME=${GIT_COMMITTER_NAME:="Conventional Commits Release"}
