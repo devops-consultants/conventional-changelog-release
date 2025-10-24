@@ -1,3 +1,10 @@
+## [0.1.10](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.9...v0.1.10) (2025-10-24)
+
+
+### Bug Fixes
+
+* update pipe.sh for improved version increment logic ([bdba014](https://github.com/devops-consultants/conventional-changelog-release/commit/bdba014842e9617f251cd3508e8e8894d226ab1c))
+
 ## [0.1.9](https://github.com/devops-consultants/conventional-changelog-release/compare/v0.1.7...v0.1.9) (2024-12-24)
 
 
